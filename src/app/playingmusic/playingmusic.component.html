@@ -1,0 +1,53 @@
+<div class="container-fluid">
+    <div class="col col-lg-12 upper row">
+        <div class="col col-lg-3 text">
+            <p style="padding-left: 30px;">Your</p><br>
+            <p>Rhythem</p>
+        </div>
+        <div class="col col-lg-3 speaker">
+            <img class="img-fluid" src="../../assets/speacker.png">
+        </div>
+       
+    </div>
+    <div class="col col-lg-12 bottom row">
+        <div class="row container">
+            <div class="col col-lg-4 song-name row" style="margin-left: 25px !important;">
+                <h6>{{ activeSong?.title }}</h6>
+                 <div class="col-6 text-left">
+                    {{ currentTime$ | async }}
+                </div>
+                <div class="col-6 text-right" *ngIf="player?.duration">
+                    {{ durationTime }}
+                </div>
+                <div class="progress col-12" style="padding:0;">
+                    <div class="progress-bar bg-info" role="progressbar"
+                        [ngStyle]="{'width': (currentProgress$ | async) + '%'}"
+                        [attr.aria-valuenow]="(currentProgress$ | async) "
+                        aria-valuemin="0" aria-valuemax="100">
+                    </div>
+                </div>
+            </div>
+            <div class="col col-lg-4 lyrics">
+                aassadsa
+            </div>
+            <div class="col col-lg-3 button" style="height: 15% !important;min-height: 10px;margin-top: 34% !important;">
+                <button type="button" class="btn btn-outline-dark" (click)="playPreviousSong()"><b><i class="fas fa-backward"></i></b></button>
+
+                <button type="button" class="btn btn-outline-dark" *ngIf="isPlaying" (click)="player.pause()"><i style="color: red;" class="fas fa-circle"></i></button>
+                <button type="button" class="btn btn-outline-dark" *ngIf="!isPlaying" (click)="playSong(activeSong)"><i class="fas fa-play"></i></button>
+          
+                <button type="button" class="btn btn-outline-dark" (click)="playNextSong()"><b><i class="fas fa-forward"></i></b></button>
+            </div>
+        </div>
+    </div>
+    <div class="video col col-lg-8 row">
+        <div class="inner-video-border col col-lg-12 row">
+            <div class="music-image col col-lg-12">
+                <img src="../../assets/bg.png" class="img-fluid">
+            </div>
+        </div>
+    </div>
+</div>
+<audio #player
+         (timeupdate)="onTimeUpdate()"
+         (pause)="onPause()"></audio>
