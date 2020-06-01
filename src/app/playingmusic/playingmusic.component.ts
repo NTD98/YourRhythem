@@ -1,6 +1,7 @@
 import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
+import { ApiService } from '../_services/api.service';
 import { BehaviorSubject, Subject } from 'rxjs';
-import { ISong } from '../_model/model';
+import { ISong } from '../_model/song';
 @Component({
   selector: 'app-playingmusic',
   templateUrl: './playingmusic.component.html',
@@ -18,8 +19,15 @@ export class PlayingmusicComponent implements OnInit {
   audio = new Audio();
   isPlaying = false;
   activeSong:any;
+  articles;
+
   durationTime: string;
-  constructor() { }
+  constructor(private apiService: ApiService) {
+    this.apiService.getNews().subscribe((data)=>{
+      console.log(data);
+      this.articles = data['articles'];
+    });
+   }
 
   ngOnInit(): void {
     this.songs = this.getListOfSongs();
