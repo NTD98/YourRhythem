@@ -5,9 +5,12 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class ApiService {
-    API_KEY = '6127ff1ad55e46a9b9bf01c448b5df4e';
-    public getNews(){
-        return this.httpClient.get(`https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=${this.API_KEY}`);
-      }
+    access_token : string;
     constructor(private httpClient: HttpClient) { }
+    setToken(token:string){
+      this.access_token=token;
+    }
+    getToken(){
+      return this.access_token;
+    }
 }

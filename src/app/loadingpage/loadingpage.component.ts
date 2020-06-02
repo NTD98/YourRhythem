@@ -15,7 +15,7 @@ export class LoadingpageComponent implements OnInit {
   private searchUrl: string;
   private redirect_uri:string;
   private client_id ='8878190d7d784bab92244dd4c86a2cf6';
-  private client_secret = 'acac31590ceb4da38a123253a8c87cc9';
+  private client_secret = 'c553a4bf482641c4b819be4a64eef2c7';
   private access_token:string;
   private encoded = btoa(this.client_id + ':' + this.client_secret);
   constructor(private router:Router,private http: Http) { 
@@ -25,6 +25,7 @@ export class LoadingpageComponent implements OnInit {
         this.access_token = val.access_token;
         localStorage.setItem('currentUser', val.access_token);
         //this.currentUserSubject.subscribe(ac=>ac = val.access_token);
+        this.getInfor(val.access_token).subscribe(val=>console.log(val));
         (this.searchMusic("A","artist",val.access_token).subscribe(val=>console.log(val)));
     }));
     //console.log(this.access_token);
@@ -41,7 +42,15 @@ export class LoadingpageComponent implements OnInit {
   public returnToken(){
     return this.currentUserSubject.value;
   }
-  
+  getInfor(token : string) {
+    let headers = new Headers();
+    headers.append('Authorization', 'Bearer ' + token);
+    this.searchUrl = 'https://api.spotify.com/v1/me';
+    return this.http.get(this.searchUrl, { headers: headers })
+      .pipe(
+        map((res: Response) => res.json())
+      )
+  }
   getToken(){
     let params = ('grant_type=client_credentials');
     let encoded = btoa(this.client_id + ':' + this.client_secret);
@@ -63,7 +72,7 @@ export class LoadingpageComponent implements OnInit {
   searchMusic(str: string, type = "artist", token: string){
     this.searchUrl = 'https://api.spotify.com/v1/search?query=' + str + '&offset=0&limit=20&type=' + type + '&market=US';
     let headers = new Headers();
-    headers.append('Authorization' , 'Bearer ' + 'token');
+    headers.append('Authorization' , 'Bearer ' + token);
     return this.http.get(this.searchUrl, {headers: headers})
     .pipe(
       map((res: Response) => res.json())

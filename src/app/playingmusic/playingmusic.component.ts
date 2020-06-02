@@ -23,15 +23,11 @@ export class PlayingmusicComponent implements OnInit {
 
   durationTime: string;
   constructor(private apiService: ApiService) {
-    this.apiService.getNews().subscribe((data)=>{
-      console.log(data);
-      this.articles = data['articles'];
-    });
    }
 
   ngOnInit(): void {
     this.songs = this.getListOfSongs();
-
+    console.log(this.apiService.getToken());
     this.player.nativeElement.src = this.songs[0];
     this.player.nativeElement.load();
     this.activeSong = this.songs[0];

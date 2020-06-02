@@ -1,2 +1,14 @@
-<span>Login with</span>
-<button (click)="login()"> login</button>
+<div class="col col-lg-12 row">
+    <div class="col col-lg-12">
+        <h3 *ngIf="!authen" class="label">
+            Login With Spotify
+        </h3>
+        <h3 *ngIf="authen" class="label">
+            You are Logged in, Redirect to homepage ...
+        </h3>
+    </div>
+    <div class="col col-lg-12 login">
+        <img (click)="login()" src="../../assets//huong-dan-cach-tai-nhac-tren-spotify-don-gian-2.jpg" alt="">
+    </div>
+</div>
+<button (click)="getInfor()">get info</button>
