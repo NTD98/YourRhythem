@@ -27,17 +27,19 @@ export class LoginComponent implements OnInit {
       this.getRefreshToken().subscribe(val=>
         {
           this.refreshtoken=val.access_token;
-          this.tokenser.setToken(this.refreshtoken);
+          this.tokenser.setToken(val.access_token);
+          this.tokenser.setReToken(val.refresh_token);
           this.authen=true;
         });
         setTimeout(() => {
-          this.router.navigate(['playingmusic']);
+          this.router.navigate(['user']);
         },5000);
     }
   }
 
   login() {
-    window.location.href = 'https://accounts.spotify.com/authorize?client_id=' + this.client_id + '&response_type=code&redirect_uri=http://localhost:4200/login&scope=user-read-private%20user-read-email&state=123&show_dialog=true';
+    let rights = 'playlist-read-private';
+    window.location.href = 'https://accounts.spotify.com/authorize?client_id=' + this.client_id + '&response_type=code&redirect_uri=http://localhost:4200/login&scope='+rights+'&state=123&show_dialog=true';
   }
   searchMusic(str: string, type = "artist", token: string) {
     this.searchUrl = 'https://api.spotify.com/v1/search?query=' + str + '&offset=0&limit=20&type=' + type + '&market=US';
