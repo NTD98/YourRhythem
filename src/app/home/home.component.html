@@ -28,15 +28,41 @@
         </ul>
     </div>
     <div class="col col-10 row justify-content-between">
-        <h3>as</h3>
-        <div [routerLink]="['../user']" class="col col-2 user">
+        <h3></h3>
+        <div [routerLink]="['../user']" class="col col-3 user">
             <div class="display-name">
+                <i class="fas fa-sort-down"></i>
                 {{user.display_name}}
                 <img src="{{user.images[0].url}}">
             </div>
         </div>
-        <div class="col col-12 row" style="width: 100%;height: 100%;background-color: aqua;content: '';">
-            asd
+        <div class="col col-12 row" style="width: 100%;height: 100%;">
+            <div class="col col-12 header">
+                <h3 class="name-playlist">Đã phát gần đây</h3>
+            </div>
+            <div class="col col-12 row music-list">
+                <div *ngFor="let Track of recentTrack" class="card-music col col-2">
+                    <div class="content">
+                        <div class="thumnail">
+                            <img src="{{Track.images[0].url}}" alt="">
+                        </div>
+                        <div class="music-info">
+                            <a href="">
+                                <span>
+                                    {{Track.name}}
+                                </span>
+                            </a>
+                            <div class="detail">
+                                <span *ngIf="Track.type=='playlist'">{{Track.description}}
+                                </span>
+                                <span *ngIf="Track.type=='album'">{{Track.artists[0].name}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
         </div>
     </div>
    

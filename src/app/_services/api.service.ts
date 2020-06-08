@@ -63,6 +63,39 @@ export class ApiService {
         map((res: Response) => res.json())
       )
   }
+  getAlbumInfo(id:string){
+    let headers = new Headers();
+    headers.append('Accept', 'application/json');
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', 'Bearer ' + this.access_token);
+    this.searchUrl = 'https://api.spotify.com/v1/albums/'+id;
+    return this.http.get(this.searchUrl, { headers: headers })
+      .pipe(
+        map((res: Response) => res.json())
+      )
+  }
+  getPlaylistInfo(id:string){
+    let headers = new Headers();
+    headers.append('Accept', 'application/json');
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', 'Bearer ' + this.access_token);
+    this.searchUrl = 'https://api.spotify.com/v1/playlists/'+id;
+    return this.http.get(this.searchUrl, { headers: headers })
+      .pipe(
+        map((res: Response) => res.json())
+      )
+  }
+  getCurrentTracks(){
+    let headers = new Headers();
+    headers.append('Accept', 'application/json');
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', 'Bearer ' + this.access_token);
+    this.searchUrl = 'https://api.spotify.com/v1/me/player/recently-played?type=track&limit=8&after=1484811043508';
+    return this.http.get(this.searchUrl, { headers: headers })
+      .pipe(
+        map((res: Response) => res.json())
+      )
+  }
   getInfor() {
     let headers = new Headers();
     headers.append('Authorization', 'Bearer ' + this.access_token);

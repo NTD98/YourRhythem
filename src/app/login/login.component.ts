@@ -32,13 +32,13 @@ export class LoginComponent implements OnInit {
           this.authen=true;
         });
         setTimeout(() => {
-          this.router.navigate(['user']);
+          this.router.navigate(['home']);
         },5000);
     }
   }
 
   login() {
-    let rights = 'playlist-read-private';
+    let rights = 'playlist-read-private%20user-read-recently-played';
     window.location.href = 'https://accounts.spotify.com/authorize?client_id=' + this.client_id + '&response_type=code&redirect_uri=http://localhost:4200/login&scope='+rights+'&state=123&show_dialog=true';
   }
   searchMusic(str: string, type = "artist", token: string) {
