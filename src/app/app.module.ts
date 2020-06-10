@@ -7,7 +7,6 @@ import { LoadingpageComponent } from './loadingpage/loadingpage.component';
 import { PlayingmusicComponent } from './playingmusic/playingmusic.component';
 import { HttpModule } from '@angular/http';
 import { LoginComponent } from './login/login.component';
-import { HomeComponent } from './home/home.component';
 import { UserinfoComponent } from './userinfo/userinfo.component';
 @NgModule({
   declarations: [
@@ -15,7 +14,6 @@ import { UserinfoComponent } from './userinfo/userinfo.component';
     LoadingpageComponent,
     PlayingmusicComponent,
     LoginComponent,
-    HomeComponent,
     UserinfoComponent
   ],
   imports: [

@@ -90,7 +90,21 @@ export class ApiService {
     headers.append('Accept', 'application/json');
     headers.append('Content-Type', 'application/json');
     headers.append('Authorization', 'Bearer ' + this.access_token);
-    this.searchUrl = 'https://api.spotify.com/v1/me/player/recently-played?type=track&limit=8&after=1484811043508';
+    this.searchUrl = 'https://api.spotify.com/v1/me/player/recently-played?type=track&limit=20&after=1489676792';
+    return this.http.get(this.searchUrl, { headers: headers })
+      .pipe(
+        map((res: Response) => res.json())
+      )
+  }
+  getRecomnendTracks(artists:string,trackid:string){
+    let headers = new Headers();
+    headers.append('Accept', 'application/json');
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', 'Bearer ' + this.access_token);
+    let genres = 'k-pop%2Cpop%2C';
+    let proxy = 'https://cors-anywhere.herokuapp.com/';
+    this.searchUrl = 'https://api.spotify.com/v1/recommendations?limit=5&market=ES&seed_artists='+artists+'&seed_genres='+genres+'&seed_tracks='+trackid;
+    console.log(this.access_token);
     return this.http.get(this.searchUrl, { headers: headers })
       .pipe(
         map((res: Response) => res.json())
