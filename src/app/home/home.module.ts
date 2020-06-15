@@ -7,15 +7,19 @@ import { Routes, RouterModule } from '@angular/router';
 import { from } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { MainComponent } from './main/main.component';
+import { SearchComponent } from './search/search.component';
 
 
 const routes: Routes = [
 
     {
       path:"",component:HomeComponent, children:[
-      {
-        path:"",component:MainComponent
-      }
+        {
+          path:"",component:MainComponent
+        },
+        {
+          path:"search",component:SearchComponent
+        }
       ]
     }
   ];
@@ -25,6 +29,7 @@ const routes: Routes = [
   declarations: [
     HomeComponent,
     MainComponent,
+    SearchComponent,
   ],
   imports: [
     CommonModule,

@@ -26,6 +26,7 @@ export class LoginComponent implements OnInit {
       this.token  = this.route.snapshot.queryParams['code'];
       this.getRefreshToken().subscribe(val=>
         {
+          console.log(val)
           this.refreshtoken=val.access_token;
           this.tokenser.setToken(val.access_token);
           this.tokenser.setReToken(val.refresh_token);

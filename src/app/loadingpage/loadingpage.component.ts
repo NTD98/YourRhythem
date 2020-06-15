@@ -32,7 +32,7 @@ export class LoadingpageComponent implements OnInit {
     setTimeout(() => 
     {
         //window.location.href = 'https://example.com/callback';
-        this.router.navigate(['playingmusic']);
+        this.router.navigate(['login']);
         this.currentUserSubject = new BehaviorSubject<String>(JSON.stringify(localStorage.getItem('currentUser')));
         this.currentUser = this.currentUserSubject.asObservable();
         console.log(this.currentUserSubject.value);

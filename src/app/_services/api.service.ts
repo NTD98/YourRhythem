@@ -21,8 +21,9 @@ export class ApiService {
     this.access_token = this.currentTokenSubject.value;
   }
   setToken(token: string) {
+    localStorage.clear();
     localStorage.setItem('currentToken',token);
-    this.access_token = this.currentTokenSubject.value;
+    this.access_token = token;
   }
   getToken() {
     return this.currentTokenSubject.value;
@@ -36,7 +37,7 @@ export class ApiService {
   getRefreshToken() {
     let params = new URLSearchParams();
     params.append('grant_type', 'refresh_token');
-    params.append('refresh_token', this.refresh_token);
+    params.append('refresh_token', this.access_token);
     let encoded = btoa(this.client_id + ':' + this.client_secret);
     let headers = new Headers();
     headers.append('Authorization', 'Basic ' + encoded);
@@ -51,6 +52,17 @@ export class ApiService {
           return data;
         })
       );
+  }
+  search(query:string,type:string){
+    let headers = new Headers();
+    headers.append('Accept', 'application/json');
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', 'Bearer ' + this.access_token);
+    this.searchUrl = 'https://api.spotify.com/v1/search?q='+query+"&type="+type+"&limit=5&offset=5";
+    return this.http.get(this.searchUrl, { headers: headers })
+      .pipe(
+        map((res: Response) => res.json())
+      )
   }
   getPlaylist() {
     let headers = new Headers();
@@ -101,7 +113,7 @@ export class ApiService {
     headers.append('Accept', 'application/json');
     headers.append('Content-Type', 'application/json');
     headers.append('Authorization', 'Bearer ' + this.access_token);
-    let genres = 'k-pop%2Cpop%2C';
+    let genres = 'k-pop%2Cpop';
     let proxy = 'https://cors-anywhere.herokuapp.com/';
     this.searchUrl = 'https://api.spotify.com/v1/recommendations?limit=5&market=ES&seed_artists='+artists+'&seed_genres='+genres+'&seed_tracks='+trackid;
     console.log(this.access_token);

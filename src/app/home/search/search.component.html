@@ -1,0 +1,96 @@
+<div class="col col-12 row">
+    <div class="col col-12 search">
+        <input #box (keyup.enter)="onEnter(box.value)" placeholder="Tim kiem nhac si, album, podcast">
+        <div class="search-container">
+            <span class="search-content">
+                <svg height="24" role="img" width="24" viewBox="0 0 512 512" class="ded5a23eeb23e836ffb86a831d247eab-scss" aria-hidden="true"><path d="M349.714 347.937l93.714 109.969-16.254 13.969-93.969-109.969q-48.508 36.825-109.207 36.825-36.826 0-70.476-14.349t-57.905-38.603-38.603-57.905-14.349-70.476 14.349-70.476 38.603-57.905 57.905-38.603 70.476-14.349 70.476 14.349 57.905 38.603 38.603 57.905 14.349 70.476q0 37.841-14.73 71.619t-40.889 58.921zM224 377.397q43.428 0 80.254-21.461t58.286-58.286 21.461-80.254-21.461-80.254-58.286-58.285-80.254-21.46-80.254 21.46-58.285 58.285-21.46 80.254 21.46 80.254 58.285 58.286 80.254 21.461z" fill="currentColor"></path></svg>
+            </span>
+            <button>
+                <svg height="24" role="img" width="24" viewBox="0 0 24 24" class="ded5a23eeb23e836ffb86a831d247eab-scss"><path d="M4.93,4.93,19.07,19.07m-14.14,0L19.07,4.93" fill="none" stroke="currentColor" stroke-miterlimit="10"></path></svg>
+            </button>
+        </div>
+    </div>
+    <div class="data col col-12 row">
+        <div class="col col-12 header">
+            <h2>
+                Nghệ sĩ
+            </h2>
+        </div>
+    </div>
+    <div class="col col-12 row music-list">
+        <div *ngFor="let artist of artists"  class="card-music col col-2">
+            <div   class="content">
+                <div *ngIf="artist.images[0].url" class="thumnail">
+                    <img src="{{artist.images[0].url}}" alt="">
+                </div>
+                <div *ngIf="!artist.images[0].url" class="thumnail">
+                    <img *ngIf="artist.images[0].url" src="../../../assets/huong-dan-cach-tai-nhac-tren-spotify-don-gian-2.jpg" alt="">
+                </div>
+                <div class="music-info">
+                    <a href="">
+                        <span>
+                           {{artist.name}}
+                        </span>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="data col col-12 row">
+        <div class="col col-12 header">
+            <h2>
+                Album
+            </h2>
+        </div>
+    </div>
+    <div class="col col-12 row music-list">
+        <div *ngFor="let album of albums" class="card-music col col-2">
+            <div class="content">
+                <div class="thumnail">
+                    <img src="{{album.images[0].url}}" alt="">
+                </div>
+                <div class="music-info">
+                    <a href="">
+                        <span>
+                            {{album.name}}
+                        </span>
+                    </a>
+                    <div class="detail">
+                        <span>{{album.artists[0].name}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="data col col-12 row">
+        <div class="col col-12 header">
+            <h2>
+                Playlist
+            </h2>
+        </div>
+    </div>
+    <div class="col col-12 row music-list">
+        <div *ngFor="let playlist of playlists" class="card-music col col-2">
+            <div class="content">
+                <div class="thumnail">
+                    <img src="{{playlist.images[0].url}}" alt="">
+                </div>
+                <div class="music-info">
+                    <a href="">
+                        <span>
+                            {{playlist.name}}
+                        </span>
+                    </a>
+                    <div class="detail">
+                        <span>{{playlist.description}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
