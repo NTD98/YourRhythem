@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
 
   login() {
     let rights = 'playlist-read-private%20user-read-recently-played';
-    window.location.href = 'https://accounts.spotify.com/authorize?client_id=' + this.client_id + '&response_type=code&redirect_uri=http://localhost:4200/login&scope='+rights+'&state=123&show_dialog=true';
+    window.location.href = 'https://accounts.spotify.com/authorize?client_id=' + this.client_id + '&response_type=code&redirect_uri=https://ntd98.github.io/YourRhythem/login&scope='+rights+'&state=123&show_dialog=true';
   }
   searchMusic(str: string, type = "artist", token: string) {
     this.searchUrl = 'https://api.spotify.com/v1/search?query=' + str + '&offset=0&limit=20&type=' + type + '&market=US';
@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
     let params = new URLSearchParams();
     params.append('grant_type', 'authorization_code');
     params.append('code', this.token);
-    params.append('redirect_uri','http://localhost:4200/login')
+    params.append('redirect_uri','https://ntd98.github.io/YourRhythem/login')
     let encoded = btoa(this.client_id + ':' + this.client_secret);
     let headers = new Headers();
     headers.append('Authorization', 'Basic ' + encoded);
